@@ -7,7 +7,7 @@ select artist.name, track.name, max(track_length) from artist, track where artis
 -- What are the albums released in the 60s? 70s? 80s? 90s?
 select * from album, artist where artist.id = album.artist_id and album.release_year between 1970 and 1979;
 -- How many albums did a given artist produce in the 90s?
-
+select * from artist, album where artist.id = album.artist_id and album.release_year between 1990 and 1999 and artist.name = 'Nirvana';
 -- What is the total run time of each album (based on the duration of its tracks)?
 
 -- What are all the tracks a given artist has recorded?
