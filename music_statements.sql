@@ -5,7 +5,7 @@ select * from album, track where album.id = track.album_id and album.name = 'Ear
 -- What is the track with the longest duration?
 select artist.name, track.name, max(track_length) from artist, track where artist.id = track.artist_id group by artist.name, track.name, track.track_length order by track.track_length desc limit 1;
 -- What are the albums released in the 60s? 70s? 80s? 90s?
-
+select * from album, artist where artist.id = album.artist_id and album.release_year between 1970 and 1979;
 -- How many albums did a given artist produce in the 90s?
 
 -- What is the total run time of each album (based on the duration of its tracks)?
