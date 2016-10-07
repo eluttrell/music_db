@@ -344,11 +344,16 @@ select * from album, artist where artist.id = album.artist_id and album.release_
 -- How many albums did a given artist produce in the 90s?
 select * from artist, album where artist.id = album.artist_id and album.release_year between 1990 and 1999 and artist.name = 'Nirvana';
 -- What is the total run time of each album (based on the duration of its tracks)?
-
+select album.name, sum(track.track_length)
+from track, album, artist
+where artist.id = album.artist_id
+and album.id = track.album_id
+and artist.name = 'Nirvana'
+group by album.id;
 -- What are all the tracks a given artist has recorded?
-
+select artist.name, track.name from artist, track where artist.id = track.artist_id and artist.name = 'David Bowie';
 -- What are the albums recorded by only one solo artist?
-
+select count, album_name, name from (select count(members.id), album.name as album_name, artist.name from album, artist, members, performers where artist.id = performers.artist_id and members.id = performers.members_id and album.artist_id = artist.id group by album.id, artist.id) as member_count_by_album where count = 1;
 -- What are the albums produced by a given artist as the lead artist?
 
 -- What albums has a given artist participated in (not necessarily as lead artist).
